@@ -22,7 +22,7 @@ def conv2d_model():
   net = tf.keras.layers.Conv2D(64, kernel_size=(3,3), strides=(1, 1))(net)
 
   net = tf.keras.layers.GlobalAveragePooling2D()(net)
-  net = tf.keras.layers.Dense(200)(net)
+  net = tf.keras.layers.Dense(200, activation='relu')(net)
 
   output = tf.keras.layers.Dense(10, activation='sigmoid')(net)
 
