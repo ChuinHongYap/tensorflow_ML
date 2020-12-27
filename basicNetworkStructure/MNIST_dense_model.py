@@ -1,7 +1,7 @@
 import tensorflow as tf
 
 '''
-MNIST example using simple model
+MNIST example using fully connected layers
 '''
 
 mnist = tf.keras.datasets.mnist
