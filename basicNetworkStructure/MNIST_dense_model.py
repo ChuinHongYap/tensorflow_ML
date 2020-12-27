@@ -18,8 +18,8 @@ test_images = test_images / 255.0
 def simple_model():
   input = tf.keras.layers.Input(shape=(INPUT_SHAPE+(1,))) #for gray scale image
   net = tf.keras.layers.Flatten()(input)  #flatten data
-  net = tf.keras.layers.Dense(200)(net)
-  net = tf.keras.layers.Dense(200)(net)
+  net = tf.keras.layers.Dense(200, activation='relu')(net)
+  net = tf.keras.layers.Dense(200, activation='relu')(net)
 
   output = tf.keras.layers.Dense(10, activation='sigmoid')(net)
 
