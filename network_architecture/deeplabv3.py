@@ -22,7 +22,7 @@ def ASPP_block(inputs, filters, rates=[6, 12, 18], activation=tf.nn.relu):
     pool = Reshape((1,1,filters))(pool)
     pool = conv_block(pool, filters=filters, kernel_size=1, activation=activation)
     pool = UpSampling2D(size=tf.shape(inputs)[1:3])(pool)
-    x = Concatenate([conv1x1, branch_1, branch_2, branch_3, pool], axis=-1)
+    x = Concatenate(axis=-1)([conv1x1, branch_1, branch_2, branch_3, pool])
     x = conv_block(x, filters=filters, kernel_size=1, activation=activation)
     return x
 
@@ -42,7 +42,7 @@ def DeepLabv3plus(input_shape, num_classes, filters=32, num_layers=5):
     for i in range(num_layers-1):
         filters //= 2
         x = Conv2DTranspose(filters, kernel_size=3, strides=2, padding='same')(x)
-        x = Concatenate([x, conv_block(inputs, filters=filters, kernel_size=1)])
+        x = Concatenate(axis=-1)([x, conv_block(inputs, filters=filters, kernel_size=1)])
     
     # Final conv layer
     x = Conv2D(num_classes, kernel_size=1)(x)
